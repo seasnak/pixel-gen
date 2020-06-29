@@ -65,10 +65,21 @@ class LWPalette(Palette):
     '''Locally Weighted Palette: Takes the probability of neighboring colors into account'''
 
     def load_palette_from_txt(self, filename):
-        print("Cannot Load a LWPalette from a text file")
+        print("Cannot Load a LWPalette from a text file yet")
 
     def load_palette_from_image(self, filename):
         '''Loads a LW Palette from an image'''
+        image = Image.open(filename)
+        # image.show()
+        for color in range(5):
+            if color not in self.colors:
+                self.colors.append(color)
+
+            w, l = image.size
+            for x in range(w):
+                for y in range(l):
+                    
+
         return
 
     def print_palette(self):
@@ -94,6 +105,6 @@ def generate_markov_image(size, palette):
 
 if __name__ == "__main__":
 
-    test_pal = WPalette("Test Palette")
-    test_pal.load_palette_from_txt("test.txt")
+    test_pal = LWPalette("Test Palette")
+    test_pal.load_palette_from_image("TestImages/bomb.png")
     generate_random_image(test_pal, (200, 200))
